@@ -33,7 +33,7 @@
     <updated>2019-05-04T21:00:40+00:00</updated>
     <rights>©2019</rights>
     <category term="term" scheme="ftp://scheme.org" label="label"/>
-    <link href="http://test.com/alternate_entry" rel="alternate" type="text/html" hreflang="en" title="alternate_entry"/>
+    <link href="http://test.com/alternate_entry" rel="alternate" type="text/html" hreflang="en" title="alternate_entry" length="300"/>
     <author>
       <name>author</name>
       <email>test@test.com</email>
@@ -44,6 +44,7 @@
       <email>contributor@test.com</email>
       <uri>http://test.com/contributor</uri>
     </contributor>
+    <published>2019-04-04T21:00:40+00:00</published>
     <summary type="text">entry summary</summary>
     <content type="html"><![CDATA[<em>Entry content</em> &amp; ...]]></content>
   </entry>

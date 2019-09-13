@@ -2,6 +2,7 @@
 
 namespace AtomGenerator;
 
+use DateTimeInterface;
 use SimpleXMLElement;
 use Webmozart\Assert\Assert;
 
@@ -21,6 +22,12 @@ class Entry extends AbstractElement
 
     /** @var null|string */
     protected $contentSrc;
+
+    /** @var null|DateTimeInterface */
+    protected $publishedDateTime;
+
+    /** @var null|Feed */
+    protected $source;
 
     /**
      * @param null|string $summary
@@ -44,7 +51,6 @@ class Entry extends AbstractElement
         Assert::true(((null !== $content) && (null === $src)) ||
             ((null === $content) && (null !== $src)) ||
             ((null === $content) && (null === $src) && (null === $type)));
-        Assert::oneOf($type, [null, 'text', 'xhtml', 'html']);
         if (null !== $src) {
             self::assertURL($src);
         }
@@ -54,14 +60,46 @@ class Entry extends AbstractElement
     }
 
     /**
+     * @param null|DateTimeInterface $publishedDateTime
+     */
+    public function setPublishedDateTime(?DateTimeInterface $publishedDateTime): void
+    {
+        $this->publishedDateTime = $publishedDateTime;
+    }
+
+    /**
+     * @param null|Feed $sourceFeed
+     */
+    public function setSource(?Feed $sourceFeed): void
+    {
+        if (null !== $sourceFeed) {
+            Assert::count($sourceFeed->getEntries(), 0, 'Source feed must not contain entries.');
+        }
+        $this->source = $sourceFeed;
+    }
+
+    /**
      * @param SimpleXMLElement $parent
      */
     public function addChildrenTo(SimpleXMLElement $parent): void
     {
+        if ((null === $this->content) && (null === $this->contentSrc)) {
+            $valid = false;
+            foreach ($this->links as $link) {
+                if ('alternate' === $link['rel']) {
+                    $valid = true;
+                }
+            }
+            Assert::true($valid, 'Content must be provided if there is no alternate link.');
+        }
+
         $entry = $parent->addChild('entry');
 
         parent::addChildrenTo($entry);
 
+        if (null !== $this->publishedDateTime) {
+            $entry->addChild('published', $this->publishedDateTime->format(DATE_ATOM));
+        }
         if (null !== $this->summary) {
             self::addChildWithTypeToElement($entry, 'summary', $this->summary, $this->summaryType);
         }
@@ -71,6 +109,10 @@ class Entry extends AbstractElement
         if (null !== $this->contentSrc) {
             $content = self::addChildWithTypeToElement($entry, 'content', null, $this->contentType);
             $content->addAttribute('src', $this->contentSrc);
+        }
+        if (null !== $this->source) {
+            $source = $entry->addChild('source');
+            $this->source->addChildrenTo($source);
         }
     }
 }

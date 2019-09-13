@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Utils;
+namespace Tests;
 
 use AtomGenerator\Entry;
 use AtomGenerator\Feed;
@@ -17,13 +17,11 @@ final class FeedTest extends TestCase
     protected const TEST_FEED_XML_PATH_1 = __DIR__.'/feed_1.xml';
     protected const TEST_FEED_XML_PATH_2 = __DIR__.'/feed_2.xml';
     protected const TEST_FEED_XML_PATH_3 = __DIR__.'/feed_3.xml';
+    protected const TEST_FEED_XML_PATH_4 = __DIR__.'/feed_4.xml';
 
     /** @var bool reset file contents */
     protected static $reset = false;
 
-    /**
-     * @group buildXML
-     */
     public function testFeedCreation1(): void
     {
         $feed = new Feed();
@@ -53,25 +51,25 @@ final class FeedTest extends TestCase
         $entry->addAuthor('author', 'test@test.com', 'http://test.com/author');
         $entry->addCategory('term', 'ftp://scheme.org', 'label');
         $entry->addContributor('contributor', 'contributor@test.com', 'http://test.com/contributor');
-        $entry->addLink('http://test.com/alternate_entry', 'alternate', 'text/html', 'en', 'alternate_entry');
+        $entry->addLink('http://test.com/alternate_entry', 'alternate', 'text/html', 'en', 'alternate_entry', 300);
         $entry->setContent('<em>Entry content</em> &amp; ...', 'html');
         $entry->setUpdatedDateTime(new DateTime('2019-05-04T21:00:40Z'));
+        $entry->setPublishedDateTime(new DateTime('2019-04-04T21:00:40Z'));
 
         $feed->addEntry($entry);
+
+        self::assertSame([$entry], $feed->getEntries());
 
         if (self::$reset) {
             file_put_contents(self::TEST_FEED_XML_PATH_1, $feed->saveXML()); // @codeCoverageIgnore
         }
 
-        $valid = Feed::validateFeed($feed->getDocument(), $errors);
+        $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertStringEqualsFile(self::TEST_FEED_XML_PATH_1, $feed->saveXML());
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_1, $feed->saveXML());
     }
 
-    /**
-     * @group buildXML
-     */
     public function testFeedCreation2(): void
     {
         $feed = new Feed();
@@ -96,15 +94,12 @@ final class FeedTest extends TestCase
             file_put_contents(self::TEST_FEED_XML_PATH_2, $feed->saveXML()); // @codeCoverageIgnore
         }
 
-        $valid = Feed::validateFeed($feed->getDocument(), $errors);
+        $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertStringEqualsFile(self::TEST_FEED_XML_PATH_2, $feed->saveXML());
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_2, $feed->saveXML());
     }
 
-    /**
-     * @group buildXML
-     */
     public function testFeedCreation3(): void
     {
         $feed = new Feed();
@@ -116,6 +111,7 @@ final class FeedTest extends TestCase
         $entry->setTitle('entry title', 'html');
         $entry->setId('tag:entry-test');
         $entry->setContent(null);
+        $entry->addLink('http://alternate.com', 'alternate');
         $entry->setUpdatedDateTime(new DateTime('2019-05-04T21:00:40Z'));
 
         $feed->addEntry($entry);
@@ -124,15 +120,45 @@ final class FeedTest extends TestCase
             file_put_contents(self::TEST_FEED_XML_PATH_3, $feed->saveXML()); // @codeCoverageIgnore
         }
 
-        $valid = Feed::validateFeed($feed->getDocument(), $errors);
+        $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertStringEqualsFile(self::TEST_FEED_XML_PATH_3, $feed->saveXML());
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_3, $feed->saveXML());
+    }
+
+    public function testFeedCreation4(): void
+    {
+        $sourceFeed = new Feed();
+        $sourceFeed->setTitle('source title');
+        $sourceFeed->setId('tag:source');
+        $sourceFeed->setUpdatedDateTime(new DateTime('2019-03-04T20:00:40Z'));
+
+        $feed = new Feed();
+        $feed->setTitle('title');
+        $feed->setId('tag:test');
+        $feed->setUpdatedDateTime(new DateTime('2019-05-04T20:00:40Z'));
+
+        $entry = new Entry();
+        $entry->setTitle('entry title', 'html');
+        $entry->setId('tag:entry-test');
+        $entry->setContent(null);
+        $entry->addLink('http://alternate.com', 'alternate');
+        $entry->setUpdatedDateTime(new DateTime('2019-05-04T21:00:40Z'));
+        $entry->setSource($sourceFeed);
+
+        $feed->addEntry($entry);
+
+        if (self::$reset) {
+            file_put_contents(self::TEST_FEED_XML_PATH_4, $feed->saveXML()); // @codeCoverageIgnore
+        }
+
+        $valid = Feed::validate($feed->getDocument(), $errors);
+        self::assertTrue($valid, self::formatXmlErrors($errors));
+
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_4, $feed->saveXML());
     }
 
     /**
-     * @group buildXML
-     *
      * @codeCoverageIgnore
      */
     public function testFeedCreationException1(): void
@@ -143,8 +169,6 @@ final class FeedTest extends TestCase
     }
 
     /**
-     * @group buildXML
-     *
      * @codeCoverageIgnore
      */
     public function testFeedCreationException2(): void
@@ -155,8 +179,6 @@ final class FeedTest extends TestCase
     }
 
     /**
-     * @group buildXML
-     *
      * @codeCoverageIgnore
      */
     public function testFeedCreationException3(): void
@@ -167,13 +189,35 @@ final class FeedTest extends TestCase
     }
 
     /**
-     * @param null|libXMLError[] $errors
+     * @codeCoverageIgnore
+     */
+    public function testFeedCreationException4(): void
+    {
+        $feed = new Feed();
+        $feed->setTitle('title');
+        $feed->setId('tag:test');
+        $feed->setUpdatedDateTime(new DateTime('2019-05-04T20:00:40Z'));
+
+        $entry = new Entry();
+        $entry->setTitle('entry title', 'html');
+        $entry->setId('tag:entry-test');
+        $entry->setUpdatedDateTime(new DateTime('2019-05-04T21:00:40Z'));
+
+        $feed->setEntries([$entry]);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Content must be provided if there is no alternate link.');
+        $feed->saveXML();
+    }
+
+    /**
+     * @param libXMLError[] $errors
      *
      * @return string
      *
      * @codeCoverageIgnore
      */
-    protected static function formatXmlErrors(?array $errors): string
+    protected static function formatXmlErrors(array $errors): string
     {
         $messages = [];
         foreach ($errors as $error) {

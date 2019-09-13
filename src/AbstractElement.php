@@ -21,7 +21,7 @@ abstract class AbstractElement
     protected $titleType;
 
     /** @var DateTimeInterface */
-    protected $updateDateTime;
+    protected $updatedDateTime;
 
     /** @var null|string */
     protected $rights;
@@ -38,7 +38,7 @@ abstract class AbstractElement
     /** @var string[][] */
     protected $categories = [];
 
-    /** @var string[][] */
+    /** @var mixed[][] */
     protected $links = [];
 
     /**
@@ -78,7 +78,7 @@ abstract class AbstractElement
      */
     public function setUpdatedDateTime(DateTimeInterface $updated): void
     {
-        $this->updateDateTime = $updated;
+        $this->updatedDateTime = $updated;
     }
 
     /**
@@ -117,18 +117,19 @@ abstract class AbstractElement
     }
 
     /**
-     * @param string      $url
+     * @param string      $uri
      * @param null|string $rel
      * @param null|string $type
      * @param null|string $hreflang
      * @param null|string $title
+     * @param null|int    $length
      */
-    public function addLink(string $url, ?string $rel = null, ?string $type = null, ?string $hreflang = null, ?string $title = null): void
+    public function addLink(string $uri, ?string $rel = null, ?string $type = null, ?string $hreflang = null, ?string $title = null, ?int $length = null): void
     {
-        self::assertURL($url);
+        self::assertURL($uri);
 
         $link = [
-            'href' => $url,
+            'href' => $uri,
         ];
 
         if (null !== $rel) {
@@ -146,6 +147,10 @@ abstract class AbstractElement
 
         if (null !== $title) {
             $link['title'] = $title;
+        }
+
+        if (null !== $length) {
+            $link['length'] = $length;
         }
 
         $this->links[] = $link;
@@ -180,7 +185,7 @@ abstract class AbstractElement
 
         self::addChildWithTypeToElement($parent, 'title', $this->title, $this->titleType);
 
-        $parent->addChild('updated', $this->updateDateTime->format(DATE_ATOM));
+        $parent->addChild('updated', $this->updatedDateTime->format(DATE_ATOM));
 
         if (null !== $this->rights) {
             self::addChildWithTypeToElement($parent, 'rights', $this->rights, $this->rightsType);

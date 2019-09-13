@@ -8,5 +8,10 @@
     <title type="html"><![CDATA[entry title]]></title>
     <updated>2019-05-04T21:00:40+00:00</updated>
     <link href="http://alternate.com" rel="alternate"/>
+    <source>
+      <id>tag:source</id>
+      <title>source title</title>
+      <updated>2019-03-04T20:00:40+00:00</updated>
+    </source>
   </entry>
 </feed>

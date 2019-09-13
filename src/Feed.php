@@ -104,14 +104,12 @@ class Feed extends AbstractElement
     public function setGenerator(?string $generator, ?string $uri = null, ?string $version = null): void
     {
         Assert::true((null !== $generator) || ((null === $uri) && (null === $version)));
-
-        $this->generator = $generator;
-        $this->generatorVersion = $version;
-
         if (null !== $uri) {
             self::assertURL($uri);
-            $this->generatorUri = $uri;
         }
+        $this->generator = $generator;
+        $this->generatorVersion = $version;
+        $this->generatorUri = $uri;
     }
 
     /**
@@ -120,6 +118,22 @@ class Feed extends AbstractElement
     public function addEntry(Entry $entry): void
     {
         $this->entries[] = $entry;
+    }
+
+    /**
+     * @param Entry[] $entries
+     */
+    public function setEntries(array $entries): void
+    {
+        $this->entries = $entries;
+    }
+
+    /**
+     * @return Entry[]
+     */
+    public function getEntries(): array
+    {
+        return $this->entries;
     }
 
     /**
@@ -232,8 +246,8 @@ class Feed extends AbstractElement
     }
 
     /**
-     * Validate XML DOMDocument against ATOM NRG schema.
-     * NRG schema coming from https://validator.w3.org/feed/docs/rfc4287.html#schema.
+     * Validate XML DOMDocument against an ATOM Relax NG schema.
+     * RNG schema coming from https://validator.w3.org/feed/docs/rfc4287.html#schema.
      *
      * @see https://cweiske.de/tagebuch/atom-validation.htm
      *
@@ -242,7 +256,7 @@ class Feed extends AbstractElement
      *
      * @return bool
      */
-    public static function validateFeed(DOMDocument $document, ?array &$errors = null): bool
+    public static function validate(DOMDocument $document, ?array &$errors = null): bool
     {
         libxml_use_internal_errors(true);
         $valid = $document->relaxNGValidate(__DIR__.'/atom.rng');
