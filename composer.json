@@ -1,0 +1,45 @@
+{
+  "name": "ddebin/atom-generator",
+  "type": "library",
+  "description": "Atom feed generator",
+  "keywords": [
+    "atom",
+    "feed",
+    "generator"
+  ],
+  "homepage": "https://github.com/ddebin/atom-generator",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Damien Debin",
+      "email": "damien.debin@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "webmozart/assert": "^1.5"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "phpunit/phpunit": "^7"
+  },
+  "config": {
+    "platform": {
+      "php": "7.1"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "AtomGenerator\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "./vendor/bin/php-cs-fixer fix --allow-risky=yes && ./vendor/bin/phpunit",
+    "phpunit": "./vendor/bin/phpunit"
+  }
+}

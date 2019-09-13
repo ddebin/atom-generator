@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication" xml:lang="en">
+  <id>tag:test</id>
+  <title>title</title>
+  <updated>2019-05-04T20:00:40+00:00</updated>
+  <rights>©2019</rights>
+  <category term="term" scheme="http://scheme.com" label="label"/>
+  <link href="http://test.com/link" rel="via" type="text/html"/>
+  <author>
+    <name>author</name>
+    <email>author@test.com</email>
+    <uri>http://test.com/author</uri>
+  </author>
+  <author>
+    <name>author</name>
+    <email>author@test.com</email>
+    <uri>http://test.com/author</uri>
+  </author>
+  <contributor>
+    <name>contributor</name>
+    <email>contributor@test.com</email>
+    <uri>http://test.com/contributor</uri>
+  </contributor>
+  <subtitle>subtitle</subtitle>
+  <logo>http://test.com/logo</logo>
+  <icon>http://test.com/icon</icon>
+  <generator version="version" uri="http://test.com/generator">generator</generator>
+  <updatePeriod xmlns="sy">hourly</updatePeriod>
+  <sy:updateFrequency xmlns:sy="sy">10</sy:updateFrequency>
+  <entry>
+    <id>tag:entry-test</id>
+    <title type="text">entry title</title>
+    <updated>2019-05-04T21:00:40+00:00</updated>
+    <rights>©2019</rights>
+    <category term="term" scheme="ftp://scheme.org" label="label"/>
+    <link href="http://test.com/alternate_entry" rel="alternate" type="text/html" hreflang="en" title="alternate_entry"/>
+    <author>
+      <name>author</name>
+      <email>test@test.com</email>
+      <uri>http://test.com/author</uri>
+    </author>
+    <contributor>
+      <name>contributor</name>
+      <email>contributor@test.com</email>
+      <uri>http://test.com/contributor</uri>
+    </contributor>
+    <summary type="text">entry summary</summary>
+    <content type="html"><![CDATA[<em>Entry content</em> &amp; ...]]></content>
+  </entry>
+</feed>

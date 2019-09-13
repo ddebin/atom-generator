@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><id>tag:test</id><title>title</title><updated>2019-05-04T20:00:40+00:00</updated><entry><id>tag:entry-test</id><title type="html"><![CDATA[entry title]]></title><updated>2019-05-04T21:00:40+00:00</updated><content src="http://test.com/content"/></entry></feed>
