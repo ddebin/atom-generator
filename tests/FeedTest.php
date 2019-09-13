@@ -40,7 +40,7 @@ final class FeedTest extends TestCase
         $feed->addContributor('contributor', 'contributor@test.com', 'http://test.com/contributor');
         $feed->setUpdatedDateTime(new DateTime('2019-05-04T20:00:40Z'));
         $feed->addCustomElement('sy', 'http://purl.org/rss/1.0/modules/syndication', 'updatePeriod', 'hourly');
-        $feed->addCustomElement('sy', 'http://purl.org/rss/1.0/modules/syndication', 'sy:updateFrequency', 10);
+        $feed->addCustomElement('sy', 'http://purl.org/rss/1.0/modules/syndication', 'updateFrequency', 10);
 
         $entry = new Entry();
         $entry->setTitle('entry title', 'text');

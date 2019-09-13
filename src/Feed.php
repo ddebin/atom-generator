@@ -138,18 +138,18 @@ class Feed extends AbstractElement
 
     /**
      * @param string        $ns
-     * @param string        $url
+     * @param string        $uri
      * @param string        $name
      * @param mixed         $value
      * @param null|string[] $attributes
      */
-    public function addCustomElement(string $ns, string $url, string $name, $value, ?array $attributes = null): void
+    public function addCustomElement(string $ns, string $uri, string $name, $value, ?array $attributes = null): void
     {
-        self::assertURL($url);
+        self::assertURL($uri);
 
         $this->customElements[] = [
             'ns' => $ns,
-            'url' => $url,
+            'uri' => $uri,
             'name' => $name,
             'value' => $value,
             'attributes' => $attributes ?? [],
@@ -186,7 +186,7 @@ class Feed extends AbstractElement
         }
 
         foreach ($this->customElements as $customElement) {
-            $element = $parent->addChild($customElement['name'], $customElement['value'], $customElement['ns']);
+            $element = $parent->addChild($customElement['name'], $customElement['value'], $customElement['uri']);
             foreach ($customElement['attributes'] as $name => $value) {
                 $element->addAttribute($name, $value);
             }
@@ -207,7 +207,7 @@ class Feed extends AbstractElement
             $attributes['xml:lang'] = $this->language;
         }
         foreach ($this->customElements as $customElement) {
-            $attributes['xmlns:'.$customElement['ns']] = $customElement['url'];
+            $attributes['xmlns:'.$customElement['ns']] = $customElement['uri'];
         }
 
         $attributesString = '';

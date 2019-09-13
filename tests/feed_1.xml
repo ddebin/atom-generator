@@ -25,8 +25,8 @@
   <logo>http://test.com/logo</logo>
   <icon>http://test.com/icon</icon>
   <generator version="version" uri="http://test.com/generator">generator</generator>
-  <updatePeriod xmlns="sy">hourly</updatePeriod>
-  <sy:updateFrequency xmlns:sy="sy">10</sy:updateFrequency>
+  <sy:updatePeriod>hourly</sy:updatePeriod>
+  <sy:updateFrequency>10</sy:updateFrequency>
   <entry>
     <id>tag:entry-test</id>
     <title type="text">entry title</title>
