@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/ddebin/atom-generator.svg?branch=master)](https://travis-ci.org/ddebin/atom-generator)
+![Travis (.org)](https://img.shields.io/travis/ddebin/atom-generator?logo=travis&style=for-the-badge)
+![Codecov](https://img.shields.io/codecov/c/github/ddebin/atom-generator?logo=codecov&style=for-the-badge)
+![PHP from Packagist](https://img.shields.io/packagist/php-v/ddebin/atom-generator?logo=php&style=for-the-badge)
+![Packagist Version](https://img.shields.io/packagist/v/ddebin/atom-generator?style=for-the-badge)
+![Packagist](https://img.shields.io/packagist/l/ddebin/atom-generator?style=for-the-badge)
 
 # Atom feed generator
 

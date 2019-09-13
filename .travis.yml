@@ -1,17 +1,25 @@
 language: php
+
 cache:
   directories:
     - $HOME/.composer
+
 sudo: false
+
 matrix:
   fast_finish: true
   include:
     - php: '7.1'
     - php: '7.2'
     - php: '7.3'
+
 install:
   - travis_retry composer install --no-progress --no-interaction --prefer-dist
+
 script:
   - ./vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run -v --stop-on-violation
-  - ./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src
-  - composer phpunit
+  - ./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests
+  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

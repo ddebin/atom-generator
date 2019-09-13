@@ -17,6 +17,8 @@
   ],
   "require": {
     "php": "^7.1",
+    "ext-dom": "*",
+    "ext-simplexml": "*",
     "webmozart/assert": "^1.5"
   },
   "require-dev": {
