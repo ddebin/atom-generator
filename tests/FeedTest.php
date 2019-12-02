@@ -213,8 +213,6 @@ final class FeedTest extends TestCase
     /**
      * @param libXMLError[] $errors
      *
-     * @return string
-     *
      * @codeCoverageIgnore
      */
     protected static function formatXmlErrors(array $errors): string

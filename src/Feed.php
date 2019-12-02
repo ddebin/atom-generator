@@ -50,33 +50,21 @@ class Feed extends AbstractElement
         $this->setPrettify(true);
     }
 
-    /**
-     * @param bool $prettify
-     */
     public function setPrettify(bool $prettify): void
     {
         $this->prettify = $prettify;
     }
 
-    /**
-     * @param null|string $language
-     */
     public function setLanguage(?string $language): void
     {
         $this->language = $language;
     }
 
-    /**
-     * @param null|string $subtitle
-     */
     public function setSubtitle(?string $subtitle): void
     {
         $this->subtitle = $subtitle;
     }
 
-    /**
-     * @param null|string $uri
-     */
     public function setIconUri(?string $uri): void
     {
         if (null !== $uri) {
@@ -85,9 +73,6 @@ class Feed extends AbstractElement
         $this->icon = $uri;
     }
 
-    /**
-     * @param null|string $uri
-     */
     public function setLogoUri(?string $uri): void
     {
         if (null !== $uri) {
@@ -96,11 +81,6 @@ class Feed extends AbstractElement
         $this->logo = $uri;
     }
 
-    /**
-     * @param null|string $generator
-     * @param null|string $uri
-     * @param null|string $version
-     */
     public function setGenerator(?string $generator, ?string $uri = null, ?string $version = null): void
     {
         Assert::true((null !== $generator) || ((null === $uri) && (null === $version)));
@@ -112,9 +92,6 @@ class Feed extends AbstractElement
         $this->generatorUri = $uri;
     }
 
-    /**
-     * @param Entry $entry
-     */
     public function addEntry(Entry $entry): void
     {
         $this->entries[] = $entry;
@@ -137,9 +114,6 @@ class Feed extends AbstractElement
     }
 
     /**
-     * @param string        $ns
-     * @param string        $uri
-     * @param string        $name
      * @param mixed         $value
      * @param null|string[] $attributes
      */
@@ -156,9 +130,6 @@ class Feed extends AbstractElement
         ];
     }
 
-    /**
-     * @param SimpleXMLElement $parent
-     */
     public function addChildrenTo(SimpleXMLElement $parent): void
     {
         parent::addChildrenTo($parent);
@@ -197,9 +168,6 @@ class Feed extends AbstractElement
         }
     }
 
-    /**
-     * @return SimpleXMLElement
-     */
     public function getSimpleXML(): SimpleXMLElement
     {
         $attributes = [];
@@ -222,9 +190,6 @@ class Feed extends AbstractElement
         return $xml;
     }
 
-    /**
-     * @return DOMDocument
-     */
     public function getDocument(): DOMDocument
     {
         $node = dom_import_simplexml($this->getSimpleXML());
@@ -233,9 +198,6 @@ class Feed extends AbstractElement
         return $node->ownerDocument;
     }
 
-    /**
-     * @return string
-     */
     public function saveXML(): string
     {
         $dom = $this->getDocument();
@@ -251,10 +213,7 @@ class Feed extends AbstractElement
      *
      * @see https://cweiske.de/tagebuch/atom-validation.htm
      *
-     * @param DOMDocument        $document
      * @param null|libXMLError[] $errors
-     *
-     * @return bool
      */
     public static function validate(DOMDocument $document, ?array &$errors = null): bool
     {

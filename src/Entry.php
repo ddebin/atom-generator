@@ -29,10 +29,6 @@ class Entry extends AbstractElement
     /** @var null|Feed */
     protected $source;
 
-    /**
-     * @param null|string $summary
-     * @param null|string $type
-     */
     public function setSummary(?string $summary, ?string $type = null): void
     {
         Assert::true((null !== $summary) || (null === $type));
@@ -41,11 +37,6 @@ class Entry extends AbstractElement
         $this->summaryType = $type;
     }
 
-    /**
-     * @param null|string $content
-     * @param null|string $type
-     * @param null|string $src
-     */
     public function setContent(?string $content, ?string $type = null, ?string $src = null): void
     {
         Assert::true(((null !== $content) && (null === $src)) ||
@@ -59,17 +50,11 @@ class Entry extends AbstractElement
         $this->contentSrc = $src;
     }
 
-    /**
-     * @param null|DateTimeInterface $publishedDateTime
-     */
     public function setPublishedDateTime(?DateTimeInterface $publishedDateTime): void
     {
         $this->publishedDateTime = $publishedDateTime;
     }
 
-    /**
-     * @param null|Feed $sourceFeed
-     */
     public function setSource(?Feed $sourceFeed): void
     {
         if (null !== $sourceFeed) {
@@ -78,9 +63,6 @@ class Entry extends AbstractElement
         $this->source = $sourceFeed;
     }
 
-    /**
-     * @param SimpleXMLElement $parent
-     */
     public function addChildrenTo(SimpleXMLElement $parent): void
     {
         if ((null === $this->content) && (null === $this->contentSrc)) {

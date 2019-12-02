@@ -51,9 +51,6 @@ abstract class AbstractElement
         $this->setUpdatedDateTime(new DateTime('now'));
     }
 
-    /**
-     * @param string $id
-     */
     public function setId(string $id): void
     {
         if ((0 !== strpos($id, 'tag:')) && (false === filter_var($id, FILTER_VALIDATE_URL))) {
@@ -62,10 +59,6 @@ abstract class AbstractElement
         $this->id = $id;
     }
 
-    /**
-     * @param string      $title
-     * @param null|string $type
-     */
     public function setTitle(string $title, ?string $type = null): void
     {
         Assert::oneOf($type, [null, 'text', 'xhtml', 'html']);
@@ -73,18 +66,11 @@ abstract class AbstractElement
         $this->titleType = $type;
     }
 
-    /**
-     * @param DateTimeInterface $updated
-     */
     public function setUpdatedDateTime(DateTimeInterface $updated): void
     {
         $this->updatedDateTime = $updated;
     }
 
-    /**
-     * @param null|string $rights
-     * @param null|string $type
-     */
     public function setRights(?string $rights, ?string $type = null): void
     {
         Assert::true((null !== $rights) || (null === $type));
@@ -93,11 +79,6 @@ abstract class AbstractElement
         $this->rightsType = $type;
     }
 
-    /**
-     * @param string      $term
-     * @param null|string $scheme
-     * @param null|string $label
-     */
     public function addCategory(string $term, ?string $scheme = null, ?string $label = null): void
     {
         $category = [
@@ -116,14 +97,6 @@ abstract class AbstractElement
         $this->categories[] = $category;
     }
 
-    /**
-     * @param string      $uri
-     * @param null|string $rel
-     * @param null|string $type
-     * @param null|string $hreflang
-     * @param null|string $title
-     * @param null|int    $length
-     */
     public function addLink(string $uri, ?string $rel = null, ?string $type = null, ?string $hreflang = null, ?string $title = null, ?int $length = null): void
     {
         self::assertURL($uri);
@@ -156,29 +129,16 @@ abstract class AbstractElement
         $this->links[] = $link;
     }
 
-    /**
-     * @param string      $name
-     * @param null|string $email
-     * @param null|string $uri
-     */
     public function addAuthor(string $name, ?string $email = null, ?string $uri = null): void
     {
         $this->authors[] = self::createPerson($name, $email, $uri);
     }
 
-    /**
-     * @param string      $name
-     * @param null|string $email
-     * @param null|string $uri
-     */
     public function addContributor(string $name, ?string $email = null, ?string $uri = null): void
     {
         $this->contributors[] = self::createPerson($name, $email, $uri);
     }
 
-    /**
-     * @param SimpleXMLElement $parent
-     */
     public function addChildrenTo(SimpleXMLElement $parent): void
     {
         $parent->addChild('id', $this->id);
@@ -217,10 +177,6 @@ abstract class AbstractElement
     }
 
     /**
-     * @param string      $name
-     * @param null|string $email
-     * @param null|string $uri
-     *
      * @return mixed[]
      */
     protected static function createPerson(string $name, ?string $email = null, ?string $uri = null): array
@@ -242,14 +198,6 @@ abstract class AbstractElement
         return $person;
     }
 
-    /**
-     * @param SimpleXMLElement $parent
-     * @param string           $name
-     * @param null|string      $data
-     * @param null|string      $type
-     *
-     * @return SimpleXMLElement
-     */
     protected static function addChildWithTypeToElement(SimpleXMLElement $parent, string $name, ?string $data, ?string $type): SimpleXMLElement
     {
         if (null !== $data) {
@@ -269,10 +217,6 @@ abstract class AbstractElement
         return $element;
     }
 
-    /**
-     * @param string           $cdataText
-     * @param SimpleXMLElement $element
-     */
     protected static function addCData(string $cdataText, SimpleXMLElement $element): void
     {
         $node = dom_import_simplexml($element);
@@ -281,9 +225,6 @@ abstract class AbstractElement
         $node->appendChild($no->createCDATASection($cdataText));
     }
 
-    /**
-     * @param string $value
-     */
     protected static function assertURL(string $value): void
     {
         if (false === filter_var($value, FILTER_VALIDATE_URL)) {
