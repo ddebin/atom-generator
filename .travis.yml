@@ -13,13 +13,19 @@ matrix:
     - php: 7.2
     - php: 7.3
 
+env:
+  matrix:
+    - COMPOSER_MODE="install"
+    - COMPOSER_MODE="update"
+    - COMPOSER_MODE="update --prefer-lowest"
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
 install:
-  - travis_retry composer install --no-progress --no-interaction --prefer-dist
+  - travis_retry composer $COMPOSER_MODE --no-progress --no-interaction --prefer-dist
 
 script:
   - ./vendor/bin/php-cs-fixer fix --allow-risky=yes --dry-run -v --stop-on-violation
