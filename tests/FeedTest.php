@@ -28,7 +28,7 @@ final class FeedTest extends TestCase
         $feed->setTitle('title');
         $feed->addAuthor('author', 'author@test.com', 'http://test.com/author');
         $feed->addAuthor('author', 'author@test.com', 'http://test.com/author');
-        $feed->setRights('©'.date('Y'));
+        $feed->setRights('©2019');
         $feed->addLink('http://test.com/link', 'via', 'text/html');
         $feed->addCategory('term', 'http://scheme.com', 'label');
         $feed->setId('tag:test');
@@ -47,7 +47,7 @@ final class FeedTest extends TestCase
         $entry->setSummary('entry summary', 'text');
         $entry->setSummary('entry summary', 'text');
         $entry->setId('tag:entry-test');
-        $entry->setRights('©'.date('Y'));
+        $entry->setRights('©2019');
         $entry->addAuthor('author', 'test@test.com', 'http://test.com/author');
         $entry->addCategory('term', 'ftp://scheme.org', 'label');
         $entry->addContributor('contributor', 'contributor@test.com', 'http://test.com/contributor');

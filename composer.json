@@ -25,8 +25,8 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.15",
     "phpunit/phpunit": "^7",
-    "phpstan/phpstan-strict-rules": "^0.11.1",
-    "phpstan/phpstan-webmozart-assert": "^0.11.2"
+    "phpstan/phpstan-strict-rules": "^0.12",
+    "phpstan/phpstan-webmozart-assert": "^0.12"
   },
   "config": {
     "platform": {
@@ -44,8 +44,8 @@
     }
   },
   "scripts": {
-    "test": "./vendor/bin/php-cs-fixer fix --allow-risky=yes && ./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests && ./vendor/bin/phpunit",
-    "phpstan": "./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests",
-    "phpunit": "./vendor/bin/phpunit"
+    "test": "php-cs-fixer fix --allow-risky=yes && phpstan analyse -l 7 -c phpstan.neon src tests && phpunit",
+    "phpstan": "phpstan analyse -l 7 -c phpstan.neon src tests",
+    "phpunit": "phpunit"
   }
 }
