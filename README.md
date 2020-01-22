@@ -11,14 +11,10 @@ This library is an [Atom](https://en.wikipedia.org/wiki/Atom_(Web_standard) feed
 
 ## Installing
 
-To include `mc-google-visualization` in your project, add it to your `composer.json` file:
+Install via [Composer](https://getcomposer.org/):
 
-```json
-{
-    "require": {
-        "ddebin/atom-generator": "^0.1"
-    }
-}
+```bash
+composer require ddebin/atom-generator
 ```
 
 ## Example
