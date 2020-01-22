@@ -19,7 +19,6 @@ matrix:
 env:
   matrix:
     - COMPOSER_MODE="install"
-    - COMPOSER_MODE="update"
     - COMPOSER_MODE="update --prefer-lowest"
 
 before_script:
