@@ -1,4 +1,4 @@
-[![Travis (.org)](https://img.shields.io/travis/ddebin/atom-generator?logo=travis&style=for-the-badge)](https://travis-ci.org/ddebin/atom-generator)
+![CI](https://img.shields.io/github/workflow/status/ddebin/atom-generator/CI?style=for-the-badge)
 [![Codecov](https://img.shields.io/codecov/c/github/ddebin/atom-generator?logo=codecov&style=for-the-badge)](https://codecov.io/gh/ddebin/atom-generator)
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/ddebin/atom-generator?logo=php&style=for-the-badge)
 [![Packagist Version](https://img.shields.io/packagist/v/ddebin/atom-generator?style=for-the-badge)](https://packagist.org/packages/ddebin/atom-generator)

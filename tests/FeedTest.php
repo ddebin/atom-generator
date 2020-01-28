@@ -67,7 +67,9 @@ final class FeedTest extends TestCase
         $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_1, $feed->saveXML());
+        $xml = $feed->saveXML();
+        assert(false !== $xml);
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_1, $xml);
     }
 
     public function testFeedCreation2(): void
@@ -97,7 +99,9 @@ final class FeedTest extends TestCase
         $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_2, $feed->saveXML());
+        $xml = $feed->saveXML();
+        assert(false !== $xml);
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_2, $xml);
     }
 
     public function testFeedCreation3(): void
@@ -123,7 +127,9 @@ final class FeedTest extends TestCase
         $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_3, $feed->saveXML());
+        $xml = $feed->saveXML();
+        assert(false !== $xml);
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_3, $xml);
     }
 
     public function testFeedCreation4(): void
@@ -155,7 +161,9 @@ final class FeedTest extends TestCase
         $valid = Feed::validate($feed->getDocument(), $errors);
         self::assertTrue($valid, self::formatXmlErrors($errors));
 
-        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_4, $feed->saveXML());
+        $xml = $feed->saveXML();
+        assert(false !== $xml);
+        self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_4, $xml);
     }
 
     /**

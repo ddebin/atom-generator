@@ -198,7 +198,10 @@ class Feed extends AbstractElement
         return $node->ownerDocument;
     }
 
-    public function saveXML(): string
+    /**
+     * @return false|string
+     */
+    public function saveXML()
     {
         $dom = $this->getDocument();
         $dom->preserveWhiteSpace = !$this->prettify;
