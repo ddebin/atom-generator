@@ -222,6 +222,7 @@ abstract class AbstractElement
         $node = dom_import_simplexml($element);
         Assert::isInstanceOf($node, DOMElement::class);
         $no = $node->ownerDocument;
+        assert(null !== $no);
         $node->appendChild($no->createCDATASection($cdataText));
     }
 

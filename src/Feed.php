@@ -194,8 +194,10 @@ class Feed extends AbstractElement
     {
         $node = dom_import_simplexml($this->getSimpleXML());
         Assert::isInstanceOf($node, DOMElement::class);
+        $no = $node->ownerDocument;
+        assert(null !== $no);
 
-        return $node->ownerDocument;
+        return $no;
     }
 
     /**

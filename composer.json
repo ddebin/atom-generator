@@ -18,20 +18,20 @@
   "require": {
     "php": "^7.1",
     "ext-dom": "*",
+    "ext-filter": "*",
     "ext-libxml": "*",
     "ext-simplexml": "*",
     "webmozart/assert": "^1.5"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.15",
-    "phpunit/phpunit": "^7",
+    "phpstan/phpstan": "^0.12.26",
     "phpstan/phpstan-strict-rules": "^0.12",
-    "phpstan/phpstan-webmozart-assert": "^0.12"
+    "phpstan/phpstan-webmozart-assert": "^0.12",
+    "phpunit/phpunit": "^7.0 || ^8.0"
   },
   "config": {
-    "platform": {
-      "php": "7.1"
-    }
+    "sort-packages": true
   },
   "autoload": {
     "psr-4": {
@@ -44,15 +44,15 @@
     }
   },
   "scripts": {
+    "coverage": "phpunit --coverage-clover=clover.xml",
+    "php-cs-fixer": "php-cs-fixer fix --allow-risky=yes",
+    "php-cs-fixer-dry-run": "php-cs-fixer fix --dry-run --allow-risky=yes",
+    "phpstan": "phpstan analyse -l max -c phpstan.neon src tests",
+    "phpunit": "phpunit",
     "test": [
       "@php-cs-fixer-dry-run",
       "@phpstan",
       "@phpunit"
-    ],
-    "php-cs-fixer-dry-run": "php-cs-fixer fix --dry-run --allow-risky=yes",
-    "php-cs-fixer": "php-cs-fixer fix --allow-risky=yes",
-    "phpstan": "phpstan analyse -l max -c phpstan.neon src tests",
-    "phpunit": "phpunit",
-    "coverage": "phpunit --coverage-clover=clover.xml"
+    ]
   }
 }
