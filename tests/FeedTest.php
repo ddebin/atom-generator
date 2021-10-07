@@ -26,18 +26,18 @@ final class FeedTest extends TestCase
     {
         $feed = new Feed();
         $feed->setTitle('title');
-        $feed->addAuthor('author', 'author@test.com', 'http://test.com/author');
-        $feed->addAuthor('author', 'author@test.com', 'http://test.com/author');
+        $feed->addAuthor('author', 'author@test.com', 'http://test.com/author?a=b&c=d');
+        $feed->addAuthor('author', 'author@test.com', 'http://test.com/author?a=b&c=d');
         $feed->setRights('©2019');
-        $feed->addLink('http://test.com/link', 'via', 'text/html');
+        $feed->addLink('http://test.com/link?a=b&c=d', 'via', 'text/html');
         $feed->addCategory('term', 'http://scheme.com', 'label');
         $feed->setId('tag:test');
         $feed->setLanguage('en');
-        $feed->setIconUri('http://test.com/icon');
-        $feed->setLogoUri('http://test.com/logo');
-        $feed->setSubtitle('subtitle');
-        $feed->setGenerator('generator', 'http://test.com/generator', 'version');
-        $feed->addContributor('contributor', 'contributor@test.com', 'http://test.com/contributor');
+        $feed->setIconUri('http://test.com/icon?a=b&c=d');
+        $feed->setLogoUri('http://test.com/logo?a=b&c=d');
+        $feed->setSubtitle('subtitle & co');
+        $feed->setGenerator('generator', 'http://test.com/generator?a=b&c=d', 'version');
+        $feed->addContributor('contributor', 'contributor@test.com', 'http://test.com/contributor?a=b&c=d');
         $feed->setUpdatedDateTime(new DateTime('2019-05-04T20:00:40Z'));
         $feed->addCustomElement('sy', 'http://purl.org/rss/1.0/modules/syndication', 'updatePeriod', 'hourly');
         $feed->addCustomElement('sy', 'http://purl.org/rss/1.0/modules/syndication', 'updateFrequency', 10);
@@ -136,19 +136,19 @@ final class FeedTest extends TestCase
     {
         $sourceFeed = new Feed();
         $sourceFeed->setTitle('source title');
-        $sourceFeed->setId('tag:source');
+        $sourceFeed->setId('https://test.com/source?a=b&c=d');
         $sourceFeed->setUpdatedDateTime(new DateTime('2019-03-04T20:00:40Z'));
 
         $feed = new Feed();
         $feed->setTitle('title');
-        $feed->setId('tag:test');
+        $feed->setId('https://test.com/feed?a=b&c=d');
         $feed->setUpdatedDateTime(new DateTime('2019-05-04T20:00:40Z'));
 
         $entry = new Entry();
         $entry->setTitle('entry title', 'html');
-        $entry->setId('tag:entry-test');
+        $entry->setId('https://test.com/entry?a=b&c=d');
         $entry->setContent(null);
-        $entry->addLink('http://alternate.com', 'alternate');
+        $entry->addLink('http://alternate.com?a=b&c=d', 'alternate');
         $entry->setUpdatedDateTime(new DateTime('2019-05-04T21:00:40Z'));
         $entry->setSource($sourceFeed);
 

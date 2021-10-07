@@ -135,19 +135,19 @@ class Feed extends AbstractElement
         parent::addChildrenTo($parent);
 
         if (null !== $this->subtitle) {
-            $parent->addChild('subtitle', $this->subtitle);
+            $parent->addChild('subtitle', htmlspecialchars($this->subtitle));
         }
 
         if (null !== $this->logo) {
-            $parent->addChild('logo', $this->logo);
+            $parent->addChild('logo', htmlspecialchars($this->logo));
         }
 
         if (null !== $this->icon) {
-            $parent->addChild('icon', $this->icon);
+            $parent->addChild('icon', htmlspecialchars($this->icon));
         }
 
         if (null !== $this->generator) {
-            $generator = $parent->addChild('generator', $this->generator);
+            $generator = $parent->addChild('generator', htmlspecialchars($this->generator));
             if (null !== $this->generatorVersion) {
                 $generator->addAttribute('version', $this->generatorVersion);
             }
@@ -157,7 +157,7 @@ class Feed extends AbstractElement
         }
 
         foreach ($this->customElements as $customElement) {
-            $element = $parent->addChild($customElement['name'], $customElement['value'], $customElement['uri']);
+            $element = $parent->addChild($customElement['name'], htmlspecialchars($customElement['value']), $customElement['uri']);
             foreach ($customElement['attributes'] as $name => $value) {
                 $element->addAttribute($name, $value);
             }
@@ -180,7 +180,7 @@ class Feed extends AbstractElement
 
         $attributesString = '';
         foreach ($attributes as $name => $attribute) {
-            $attributesString .= " {$name}=\"{$attribute}\"";
+            $attributesString .= ' '.$name.'="'.htmlspecialchars($attribute).'"';
         }
 
         $xml = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom"'.$attributesString.' />');

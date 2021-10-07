@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id>tag:test</id>
+  <id>https://test.com/feed?a=b&amp;c=d</id>
   <title>title</title>
   <updated>2019-05-04T20:00:40+00:00</updated>
   <entry>
-    <id>tag:entry-test</id>
+    <id>https://test.com/entry?a=b&amp;c=d</id>
     <title type="html"><![CDATA[entry title]]></title>
     <updated>2019-05-04T21:00:40+00:00</updated>
-    <link href="http://alternate.com" rel="alternate"/>
+    <link href="http://alternate.com?a=b&amp;c=d" rel="alternate"/>
     <source>
-      <id>tag:source</id>
+      <id>https://test.com/source?a=b&amp;c=d</id>
       <title>source title</title>
       <updated>2019-03-04T20:00:40+00:00</updated>
     </source>

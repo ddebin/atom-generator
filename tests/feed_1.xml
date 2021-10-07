@@ -5,26 +5,26 @@
   <updated>2019-05-04T20:00:40+00:00</updated>
   <rights>©2019</rights>
   <category term="term" scheme="http://scheme.com" label="label"/>
-  <link href="http://test.com/link" rel="via" type="text/html"/>
+  <link href="http://test.com/link?a=b&amp;c=d" rel="via" type="text/html"/>
   <author>
     <name>author</name>
     <email>author@test.com</email>
-    <uri>http://test.com/author</uri>
+    <uri>http://test.com/author?a=b&amp;c=d</uri>
   </author>
   <author>
     <name>author</name>
     <email>author@test.com</email>
-    <uri>http://test.com/author</uri>
+    <uri>http://test.com/author?a=b&amp;c=d</uri>
   </author>
   <contributor>
     <name>contributor</name>
     <email>contributor@test.com</email>
-    <uri>http://test.com/contributor</uri>
+    <uri>http://test.com/contributor?a=b&amp;c=d</uri>
   </contributor>
-  <subtitle>subtitle</subtitle>
-  <logo>http://test.com/logo</logo>
-  <icon>http://test.com/icon</icon>
-  <generator version="version" uri="http://test.com/generator">generator</generator>
+  <subtitle>subtitle &amp; co</subtitle>
+  <logo>http://test.com/logo?a=b&amp;c=d</logo>
+  <icon>http://test.com/icon?a=b&amp;c=d</icon>
+  <generator version="version" uri="http://test.com/generator?a=b&amp;c=d">generator</generator>
   <sy:updatePeriod>hourly</sy:updatePeriod>
   <sy:updateFrequency>10</sy:updateFrequency>
   <entry>

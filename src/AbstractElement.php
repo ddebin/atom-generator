@@ -141,7 +141,7 @@ abstract class AbstractElement
 
     public function addChildrenTo(SimpleXMLElement $parent): void
     {
-        $parent->addChild('id', $this->id);
+        $parent->addChild('id', htmlspecialchars($this->id));
 
         self::addChildWithTypeToElement($parent, 'title', $this->title, $this->titleType);
 
@@ -170,7 +170,7 @@ abstract class AbstractElement
             foreach ($elements as $element) {
                 $child = $parent->addChild($type);
                 foreach ($element as $name => $attribute) {
-                    $child->addChild($name, $attribute);
+                    $child->addChild($name, htmlspecialchars($attribute));
                 }
             }
         }
@@ -205,7 +205,7 @@ abstract class AbstractElement
                 $element = $parent->addChild($name);
                 self::addCData($data, $element);
             } else {
-                $element = $parent->addChild($name, $data);
+                $element = $parent->addChild($name, htmlspecialchars($data));
             }
         } else {
             $element = $parent->addChild($name);
