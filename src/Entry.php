@@ -39,9 +39,9 @@ class Entry extends AbstractElement
 
     public function setContent(?string $content, ?string $type = null, ?string $src = null): void
     {
-        Assert::true(((null !== $content) && (null === $src)) ||
-            ((null === $content) && (null !== $src)) ||
-            ((null === $content) && (null === $src) && (null === $type)));
+        Assert::true(((null !== $content) && (null === $src))
+            || ((null === $content) && (null !== $src))
+            || ((null === $content) && (null === $src) && (null === $type)));
         if (null !== $src) {
             self::assertURL($src);
         }
