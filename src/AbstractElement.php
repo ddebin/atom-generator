@@ -4,7 +4,6 @@ namespace AtomGenerator;
 
 use DateTime;
 use DateTimeInterface;
-use DOMElement;
 use InvalidArgumentException;
 use SimpleXMLElement;
 use Webmozart\Assert\Assert;
@@ -38,7 +37,7 @@ abstract class AbstractElement
     /** @var string[][] */
     protected $categories = [];
 
-    /** @var mixed[][] */
+    /** @var string[][] */
     protected $links = [];
 
     /**
@@ -123,7 +122,7 @@ abstract class AbstractElement
         }
 
         if (null !== $length) {
-            $link['length'] = $length;
+            $link['length'] = (string) $length;
         }
 
         $this->links[] = $link;
@@ -177,7 +176,7 @@ abstract class AbstractElement
     }
 
     /**
-     * @return mixed[]
+     * @return string[]
      */
     protected static function createPerson(string $name, ?string $email = null, ?string $uri = null): array
     {
@@ -220,7 +219,7 @@ abstract class AbstractElement
     protected static function addCData(string $cdataText, SimpleXMLElement $element): void
     {
         $node = dom_import_simplexml($element);
-        Assert::isInstanceOf($node, DOMElement::class);
+        assert(false !== $node);
         $no = $node->ownerDocument;
         assert(null !== $no);
         $node->appendChild($no->createCDATASection($cdataText));

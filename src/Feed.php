@@ -3,7 +3,6 @@
 namespace AtomGenerator;
 
 use DOMDocument;
-use DOMElement;
 use LibXMLError;
 use SimpleXMLElement;
 use Webmozart\Assert\Assert;
@@ -37,7 +36,10 @@ class Feed extends AbstractElement
     /** @var null|string */
     protected $generatorUri;
 
-    /** @var mixed[][] */
+    /**
+     * @var mixed[][]
+     * @phpstan-var array<array{ns: string, uri: string, name: string, value: string, attributes: string[]}>
+     */
     protected $customElements = [];
 
     /**
@@ -114,10 +116,9 @@ class Feed extends AbstractElement
     }
 
     /**
-     * @param mixed         $value
      * @param null|string[] $attributes
      */
-    public function addCustomElement(string $ns, string $uri, string $name, $value, ?array $attributes = null): void
+    public function addCustomElement(string $ns, string $uri, string $name, string $value, ?array $attributes = null): void
     {
         self::assertURL($uri);
 
@@ -193,7 +194,7 @@ class Feed extends AbstractElement
     public function getDocument(): DOMDocument
     {
         $node = dom_import_simplexml($this->getSimpleXML());
-        Assert::isInstanceOf($node, DOMElement::class);
+        assert(false !== $node);
         $no = $node->ownerDocument;
         assert(null !== $no);
 
