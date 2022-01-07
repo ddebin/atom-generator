@@ -5,6 +5,7 @@ namespace Tests;
 use AtomGenerator\Entry;
 use AtomGenerator\Feed;
 use DateTime;
+use Exception;
 use InvalidArgumentException;
 use LibXMLError;
 use PHPUnit\Framework\TestCase;
@@ -22,6 +23,9 @@ final class FeedTest extends TestCase
     /** @var bool reset file contents */
     protected static $reset = false;
 
+    /**
+     * @throws Exception
+     */
     public function testFeedCreation1(): void
     {
         $feed = new Feed();
@@ -72,6 +76,9 @@ final class FeedTest extends TestCase
         self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_1, $xml);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testFeedCreation2(): void
     {
         $feed = new Feed();
@@ -104,6 +111,9 @@ final class FeedTest extends TestCase
         self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_2, $xml);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testFeedCreation3(): void
     {
         $feed = new Feed();
@@ -132,6 +142,9 @@ final class FeedTest extends TestCase
         self::assertXmlStringEqualsXmlFile(self::TEST_FEED_XML_PATH_3, $xml);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testFeedCreation4(): void
     {
         $sourceFeed = new Feed();
@@ -198,6 +211,8 @@ final class FeedTest extends TestCase
 
     /**
      * @codeCoverageIgnore
+     *
+     * @throws Exception
      */
     public function testFeedCreationException4(): void
     {

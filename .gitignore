@@ -1,6 +1,5 @@
 /vendor/
-/.php-cs-fixer.cache
-/.phpunit.result.cache
+/.*.cache
 /tests-report-html/
 /composer.lock
 /coverage.xml

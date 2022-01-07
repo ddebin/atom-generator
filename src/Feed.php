@@ -3,6 +3,7 @@
 namespace AtomGenerator;
 
 use DOMDocument;
+use Exception;
 use LibXMLError;
 use SimpleXMLElement;
 use Webmozart\Assert\Assert;
@@ -37,7 +38,7 @@ class Feed extends AbstractElement
     protected $generatorUri;
 
     /**
-     * @var mixed[][]
+     * @var array[]
      * @phpstan-var array<array{ns: string, uri: string, name: string, value: string, attributes: string[]}>
      */
     protected $customElements = [];
@@ -169,6 +170,9 @@ class Feed extends AbstractElement
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function getSimpleXML(): SimpleXMLElement
     {
         $attributes = [];
@@ -191,6 +195,9 @@ class Feed extends AbstractElement
         return $xml;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getDocument(): DOMDocument
     {
         $node = dom_import_simplexml($this->getSimpleXML());
@@ -202,6 +209,8 @@ class Feed extends AbstractElement
     }
 
     /**
+     * @throws Exception
+     *
      * @return false|string
      */
     public function saveXML()
