@@ -39,6 +39,7 @@ class Feed extends AbstractElement
 
     /**
      * @var array[]
+     *
      * @phpstan-var array<array{ns: string, uri: string, name: string, value: string, attributes: string[]}>
      */
     protected $customElements = [];
@@ -201,7 +202,6 @@ class Feed extends AbstractElement
     public function getDocument(): DOMDocument
     {
         $node = dom_import_simplexml($this->getSimpleXML());
-        assert(false !== $node);
         $no = $node->ownerDocument;
         assert(null !== $no);
 
@@ -209,9 +209,9 @@ class Feed extends AbstractElement
     }
 
     /**
-     * @throws Exception
-     *
      * @return false|string
+     *
+     * @throws Exception
      */
     public function saveXML()
     {
