@@ -1,10 +1,8 @@
 name: CI
 
 on:
-  pull_request: null
-  push:
-    branches:
-      - master
+  - pull_request
+  - push
 
 jobs:
   tests:
@@ -12,7 +10,7 @@ jobs:
     strategy:
       matrix:
         php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
-    name: PHP ${{ matrix.php }} tests
+    name: PHP ${{ matrix.php }}
     steps:
       -   uses: actions/checkout@v2
       # required for "git tag" presence for MonorepoBuilder split and ChangelogLinker git tags resolver; default is 1
@@ -27,6 +25,7 @@ jobs:
       -   run: composer phpunit
 
   tests_lowest_dependencies:
+    name: Lowest dependencies
     runs-on: ubuntu-latest
     steps:
       -   uses: actions/checkout@v2
@@ -41,6 +40,7 @@ jobs:
       -   run: composer phpunit
 
   test_coverage:
+    name: Coverage
     runs-on: ubuntu-latest
     steps:
       -   uses: actions/checkout@v2
@@ -56,10 +56,9 @@ jobs:
             composer coverage
             # codecov.io
             bash <(curl -s https://codecov.io/bash)
-          env:
-            CODECOV_TOKEN: 'de38eee4-bbc9-43bc-811c-c96a7d6ec3b6'
 
   php-cs-fixer:
+    name: PHP CS Fixer
     runs-on: ubuntu-latest
     steps:
       -   uses: actions/checkout@v2
@@ -73,12 +72,13 @@ jobs:
       -   run: composer php-cs-fixer-dry-run
 
   phpstan:
+    name: PHPStan
     runs-on: ubuntu-latest
     steps:
       -   uses: actions/checkout@v2
       -   uses: shivammathur/setup-php@v2
           with:
-            php-version: 7.1
+            php-version: 8.1
             coverage: none
       -   run: composer install --no-progress
       -   run: composer phpstan

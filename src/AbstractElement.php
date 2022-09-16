@@ -219,7 +219,6 @@ abstract class AbstractElement
     protected static function addCData(string $cdataText, SimpleXMLElement $element): void
     {
         $node = dom_import_simplexml($element);
-        assert(false !== $node);
         $no = $node->ownerDocument;
         assert(null !== $no);
         $node->appendChild($no->createCDATASection($cdataText));
