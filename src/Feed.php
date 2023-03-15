@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace AtomGenerator;
 
 use DOMDocument;
@@ -228,7 +230,7 @@ class Feed extends AbstractElement
      *
      * @see https://cweiske.de/tagebuch/atom-validation.htm
      *
-     * @param null|libXMLError[] $errors
+     * @param null|LibXMLError[] $errors
      */
     public static function validate(DOMDocument $document, ?array &$errors = null): bool
     {

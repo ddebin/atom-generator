@@ -45,11 +45,11 @@
     }
   },
   "scripts": {
-    "coverage": "phpunit --coverage-clover=clover.xml",
-    "php-cs-fixer": "php-cs-fixer fix --allow-risky=yes",
-    "php-cs-fixer-dry-run": "php-cs-fixer fix --dry-run --allow-risky=yes",
-    "phpstan": "phpstan analyse -l max -c phpstan.neon src tests",
-    "phpunit": "phpunit",
+    "coverage": "@php phpunit --coverage-clover=clover.xml",
+    "php-cs-fixer": "@php php-cs-fixer fix --allow-risky=yes",
+    "php-cs-fixer-dry-run": "@php php-cs-fixer fix --dry-run --allow-risky=yes",
+    "phpstan": "@php phpstan analyse -l max -c phpstan.neon src tests example .php-cs-fixer.php",
+    "phpunit": "@php phpunit",
     "test": [
       "@php-cs-fixer-dry-run",
       "@phpstan",
