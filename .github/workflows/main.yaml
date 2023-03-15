@@ -6,13 +6,13 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1']
+        php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
     name: PHP ${{ matrix.php }}
     steps:
-      -   uses: actions/checkout@v2
+      -   uses: actions/checkout@v3
       # required for "git tag" presence for MonorepoBuilder split and ChangelogLinker git tags resolver; default is 1
       -   run: git fetch --depth=100000 origin
       # see https://github.com/shivammathur/setup-php
@@ -26,14 +26,14 @@ jobs:
 
   tests_lowest_dependencies:
     name: Lowest dependencies
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      -   uses: actions/checkout@v2
+      -   uses: actions/checkout@v3
       -   run: git fetch --depth=100000 origin
       # see https://github.com/shivammathur/setup-php
       -   uses: shivammathur/setup-php@v2
           with:
-            php-version: 7.1
+            php-version: '7.1'
             extensions: xml
             coverage: none
       -   run: composer update --no-progress --prefer-lowest
@@ -41,14 +41,14 @@ jobs:
 
   test_coverage:
     name: Coverage
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      -   uses: actions/checkout@v2
+      -   uses: actions/checkout@v3
       -   run: git fetch --depth=100000 origin
       # see https://github.com/shivammathur/setup-php
       -   uses: shivammathur/setup-php@v2
           with:
-            php-version: 7.1
+            php-version: '7.1'
             extensions: xml, xdebug
             coverage: xdebug
       -   run: composer install --no-progress
@@ -59,13 +59,13 @@ jobs:
 
   php-cs-fixer:
     name: PHP CS Fixer
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      -   uses: actions/checkout@v2
+      -   uses: actions/checkout@v3
       # see https://github.com/shivammathur/setup-php
       -   uses: shivammathur/setup-php@v2
           with:
-            php-version: 7.4
+            php-version: '8.2'
             extensions: xml
             coverage: none
       -   run: composer install --no-progress
@@ -73,12 +73,12 @@ jobs:
 
   phpstan:
     name: PHPStan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      -   uses: actions/checkout@v2
+      -   uses: actions/checkout@v3
       -   uses: shivammathur/setup-php@v2
           with:
-            php-version: 8.1
+            php-version: '8.2'
             coverage: none
       -   run: composer install --no-progress
       -   run: composer phpstan

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Tests;
 
 use AtomGenerator\Entry;
@@ -234,7 +236,7 @@ final class FeedTest extends TestCase
     }
 
     /**
-     * @param libXMLError[] $errors
+     * @param LibXMLError[] $errors
      *
      * @codeCoverageIgnore
      */
