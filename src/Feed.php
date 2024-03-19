@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace AtomGenerator;
 
 use DOMDocument;
-use Exception;
 use LibXMLError;
 use SimpleXMLElement;
 use Webmozart\Assert\Assert;
@@ -153,6 +152,7 @@ class Feed extends AbstractElement
 
         if (null !== $this->generator) {
             $generator = $parent->addChild('generator', htmlspecialchars($this->generator));
+            assert(null !== $generator);
             if (null !== $this->generatorVersion) {
                 $generator->addAttribute('version', $this->generatorVersion);
             }
@@ -163,6 +163,7 @@ class Feed extends AbstractElement
 
         foreach ($this->customElements as $customElement) {
             $element = $parent->addChild($customElement['name'], htmlspecialchars($customElement['value']), $customElement['uri']);
+            assert(null !== $element);
             foreach ($customElement['attributes'] as $name => $value) {
                 $element->addAttribute($name, $value);
             }
@@ -173,9 +174,6 @@ class Feed extends AbstractElement
         }
     }
 
-    /**
-     * @throws Exception
-     */
     public function getSimpleXML(): SimpleXMLElement
     {
         $attributes = [];
@@ -198,9 +196,6 @@ class Feed extends AbstractElement
         return $xml;
     }
 
-    /**
-     * @throws Exception
-     */
     public function getDocument(): DOMDocument
     {
         $node = dom_import_simplexml($this->getSimpleXML());
@@ -212,8 +207,6 @@ class Feed extends AbstractElement
 
     /**
      * @return false|string
-     *
-     * @throws Exception
      */
     public function saveXML()
     {
