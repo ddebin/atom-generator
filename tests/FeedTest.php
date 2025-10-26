@@ -67,7 +67,7 @@ final class FeedTest extends TestCase
         }
 
         $valid = Feed::validate($feed->getDocument(), $errors);
-        self::assertTrue($valid, self::formatXmlErrors($errors));
+        self::assertTrue($valid, self::formatXmlErrors($errors ?? []));
 
         $xml = $feed->saveXML();
         assert(false !== $xml);
@@ -99,7 +99,7 @@ final class FeedTest extends TestCase
         }
 
         $valid = Feed::validate($feed->getDocument(), $errors);
-        self::assertTrue($valid, self::formatXmlErrors($errors));
+        self::assertTrue($valid, self::formatXmlErrors($errors ?? []));
 
         $xml = $feed->saveXML();
         assert(false !== $xml);
@@ -127,7 +127,7 @@ final class FeedTest extends TestCase
         }
 
         $valid = Feed::validate($feed->getDocument(), $errors);
-        self::assertTrue($valid, self::formatXmlErrors($errors));
+        self::assertTrue($valid, self::formatXmlErrors($errors ?? []));
 
         $xml = $feed->saveXML();
         assert(false !== $xml);
@@ -161,7 +161,7 @@ final class FeedTest extends TestCase
         }
 
         $valid = Feed::validate($feed->getDocument(), $errors);
-        self::assertTrue($valid, self::formatXmlErrors($errors));
+        self::assertTrue($valid, self::formatXmlErrors($errors ?? []));
 
         $xml = $feed->saveXML();
         assert(false !== $xml);
