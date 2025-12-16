@@ -5,7 +5,7 @@ declare(strict_types = 1);
 use AtomGenerator\Entry;
 use AtomGenerator\Feed;
 
-include_once 'vendor/autoload.php';
+include_once __DIR__.'/../vendor/autoload.php';
 
 $entry = new Entry();
 $entry->setTitle('Post', 'text');

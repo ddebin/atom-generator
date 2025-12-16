@@ -17,12 +17,15 @@ use PHPUnit\Framework\TestCase;
 final class FeedTest extends TestCase
 {
     protected const TEST_FEED_XML_PATH_1 = __DIR__.'/feed_1.xml';
+
     protected const TEST_FEED_XML_PATH_2 = __DIR__.'/feed_2.xml';
+
     protected const TEST_FEED_XML_PATH_3 = __DIR__.'/feed_3.xml';
+
     protected const TEST_FEED_XML_PATH_4 = __DIR__.'/feed_4.xml';
 
     /** @var bool reset file contents */
-    protected static $reset = false;
+    protected static bool $reset = false;
 
     public function testFeedCreation1(): void
     {

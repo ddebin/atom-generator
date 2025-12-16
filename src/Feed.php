@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace AtomGenerator;
 
 use DOMDocument;
+use Exception;
 use LibXMLError;
 use SimpleXMLElement;
 use Webmozart\Assert\Assert;
@@ -12,38 +13,30 @@ use Webmozart\Assert\Assert;
 class Feed extends AbstractElement
 {
     /** @var Entry[] */
-    protected $entries = [];
+    protected array $entries = [];
 
-    /** @var bool */
-    protected $prettify = false;
+    protected bool $prettify = false;
 
-    /** @var null|string */
-    protected $language;
+    protected ?string $language = null;
 
-    /** @var null|string */
-    protected $subtitle;
+    protected ?string $subtitle = null;
 
-    /** @var null|string */
-    protected $icon;
+    protected ?string $icon = null;
 
-    /** @var null|string */
-    protected $logo;
+    protected ?string $logo = null;
 
-    /** @var null|string */
-    protected $generator;
+    protected ?string $generator = null;
 
-    /** @var null|string */
-    protected $generatorVersion;
+    protected ?string $generatorVersion = null;
 
-    /** @var null|string */
-    protected $generatorUri;
+    protected ?string $generatorUri = null;
 
     /**
      * @var array[]
      *
      * @phpstan-var array<array{ns: string, uri: string, name: string, value: string, attributes: string[]}>
      */
-    protected $customElements = [];
+    protected array $customElements = [];
 
     /**
      * Feed constructor.
@@ -174,6 +167,9 @@ class Feed extends AbstractElement
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function getSimpleXML(): SimpleXMLElement
     {
         $attributes = [];

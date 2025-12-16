@@ -10,26 +10,19 @@ use Webmozart\Assert\Assert;
 
 class Entry extends AbstractElement
 {
-    /** @var null|string */
-    protected $summary;
+    protected ?string $summary = null;
 
-    /** @var null|string */
-    protected $summaryType;
+    protected ?string $summaryType = null;
 
-    /** @var null|string */
-    protected $content;
+    protected ?string $content = null;
 
-    /** @var null|string */
-    protected $contentType;
+    protected ?string $contentType = null;
 
-    /** @var null|string */
-    protected $contentSrc;
+    protected ?string $contentSrc = null;
 
-    /** @var null|DateTimeInterface */
-    protected $publishedDateTime;
+    protected ?DateTimeInterface $publishedDateTime = null;
 
-    /** @var null|Feed */
-    protected $source;
+    protected ?Feed $source = null;
 
     public function setSummary(?string $summary, ?string $type = null): void
     {

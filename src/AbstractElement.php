@@ -12,35 +12,29 @@ use Webmozart\Assert\Assert;
 
 abstract class AbstractElement
 {
-    /** @var string */
-    protected $id;
+    protected string $id;
 
-    /** @var string */
-    protected $title;
+    protected string $title;
 
-    /** @var null|string */
-    protected $titleType;
+    protected ?string $titleType = null;
 
-    /** @var DateTimeInterface */
-    protected $updatedDateTime;
+    protected DateTimeInterface $updatedDateTime;
 
-    /** @var null|string */
-    protected $rights;
+    protected ?string $rights = null;
 
-    /** @var null|string */
-    protected $rightsType;
+    protected ?string $rightsType = null;
 
     /** @var string[][] */
-    protected $authors = [];
+    protected array $authors = [];
 
     /** @var string[][] */
-    protected $contributors = [];
+    protected array $contributors = [];
 
     /** @var string[][] */
-    protected $categories = [];
+    protected array $categories = [];
 
     /** @var string[][] */
-    protected $links = [];
+    protected array $links = [];
 
     /**
      * AbstractElement constructor.
